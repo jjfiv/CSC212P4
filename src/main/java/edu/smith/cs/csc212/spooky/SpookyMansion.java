@@ -43,6 +43,12 @@ public class SpookyMansion implements GameWorld {
 		basement.addExit(new Exit("entranceHall", "There are stairs leading up."));
 		basement.addExit(new Exit("fallingPit", "There appears to be a pit in the center of the room you could climb into..."));
 		
+		//Add another room connected to the Basement. DONE???  Now add to main game****
+		//Place blueroom = insert(Place.create("blueroom", "There's definitely something calming about this room.\n"
+				//+ "This room is entirely blue. The walls and lighting are blue ... a serene setting but isn't it somewhat weird that it's at the bottom of the whole mansion?? "
+				//+ "Maybe we're not going in the right direction??"));
+		//blueroom.addExit(new Exit("basement", "There is more back through the basement."));
+		
 		Place fallingPit = insert(
 				Place.create("fallingPit", "I don't know what you were thinking..."));
 		fallingPit.addExit(new Exit("labyrinth0", "Keep falling."));
@@ -51,6 +57,12 @@ public class SpookyMansion implements GameWorld {
 				"Something rustles in the rafters as you enter the attic. Creepy.\n" + "It's big up here."));
 		attic.addExit(new Exit("entranceHall", "There are stairs leading down."));
 		attic.addExit(new Exit("attic2", "There is more through an archway."));
+		
+		//Add another room connected to the Attic. DONE??? Now add to main game****
+		//Place redroom = insert(Place.create("redroom", "There's definitely something frightening about this room.\n"
+				//+ "This room is entirely red. The walls and lighting are red ... an eerie setting perhaps danger lurking here or "
+				//+ "maybe this way is just a red herring ... "));
+		//redroom.addExit(new Exit("attic", "There is more back through the archway."));
 
 		Place attic2 = insert(Place.create("attic2", "There's definitely a bat in here somewhere.\n"
 				+ "This part of the attic is brighter, so maybe you're safe here."));
@@ -78,8 +90,19 @@ public class SpookyMansion implements GameWorld {
 		Place secretRoom = insert(Place.create("secretRoom", "You have found the secret room."));
 		secretRoom.addExit(new Exit("labyrinth0", "There is door with a skull on it... "+EMOJI_SKULL));
 		secretRoom.addExit(new Exit("hallway0", "There is a long hallway."));
-
-		int hallwayDepth = 3;
+		
+		//Secret exit available only after searching
+		secretRoom.addExit(new SecretExit("hidden door", "Something is hidden behind here"));
+		//Dead end visible past secret exit
+		Place secretExit = insert(Place.create("hidden door", "We're at a dead end it seems like!"));
+		//Exit to return back to the secret room
+		secretExit.addExit(new Exit("secretRoom", "Let's turn back!"));
+		
+		//Add an Exit from the secretRoom to the basement (but not in the other direction). DONE
+		secretRoom.addExit(new Exit("basement", "There are stairs leading far down."));
+		
+		//Make the very long hallway even longer.
+		int hallwayDepth = 6;
 		int lastHallwayPart = hallwayDepth - 1;
 		for (int i = 0; i < hallwayDepth; i++) {
 			Place hallwayPart = insert(Place.create("hallway" + i, "This is a very long hallway."));

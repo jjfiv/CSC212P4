@@ -86,6 +86,12 @@ public class Place {
 		return visible;
 	}
 	
+	public void searchAllExitsEvenTheInvisibleOnes() {
+		for (Exit e : this.exits) {
+			e.search();
+		}
+	}
+	      
 	/**
 	 * This is a terminal location (good or bad).
 	 * @param id - this is the id of the place (for creating {@link Exit} objects that go here).

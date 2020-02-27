@@ -24,6 +24,8 @@ public class InteractiveFiction {
 
 		// Play the game until quitting.
 		// This is too hard to express here, so we just use an infinite loop with breaks.
+		
+		System.out.println("Type help if you need some clarification!");
 		while (true) {
 			// Print the description of where you are.
 			Place here = game.getPlace(player.getPlace());
@@ -31,7 +33,15 @@ public class InteractiveFiction {
 			System.out.println();
 			System.out.println("... --- ...");
 			System.out.println(here.getDescription());
-
+			System.out.println(player.getHour() + ":00");
+			
+			//When you visit a place for the second time, print out a message indicating to the player 
+			//that they have been to that place before. This will not carry over between games. -- LAB DONE
+			if (player.hasBeenHereBefore()) {
+				System.out.println("Why do we remember the layout of this place ... Have we perhaps been here before???");
+			}
+			player.rememberThisPlace();
+			
 			// Game over after print!
 			if (here.isTerminalState()) {
 				break;
@@ -55,8 +65,9 @@ public class InteractiveFiction {
 			// Get the word they typed as lowercase, and no spaces.
 			// Do not uppercase action -- I have lowercased it.
 			String action = words.get(0).toLowerCase().trim();
-
-			if (action.equals("quit")) {
+ 
+			//(3) Allow users to quit with the word "escape" or just the letter "q". (They will still need to press enter). DONE
+			if (action.equals("quit") || action.equals("escape") || action.equals("q")) {
 				if (input.confirm("Are you sure you want to quit?")) {
 					// quit!
 					break;
@@ -65,7 +76,24 @@ public class InteractiveFiction {
 					continue;
 				}
 			}
-
+			//(3) Add a "help" command that explains to type in the number of the room as well as how to quit. DONE
+			if (action.equals("help")) {
+				System.out.println("Type in the number of the room to progress through the game! If you want to quit press "
+						+ "either 'quit,' 'escape', or 'q'!");
+				continue;
+			}
+			
+			if (action.equals("search")) {
+				here.searchAllExitsEvenTheInvisibleOnes();
+				continue;
+			}
+			
+			if (action.equals("rest")) {
+				player.getGameTime().increaseHour();
+				player.getGameTime().increaseHour();
+				System.out.println("You've rested for 2 hours ... I wonder what time it is now?");
+				continue;
+			}
 			// From here on out, what they typed better be a number!
 			Integer exitNum = null;
 			try {
