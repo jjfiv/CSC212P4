@@ -110,9 +110,12 @@ What does this look like? Consider part of this example: [LockedExit.md](LockedE
  - (4) There must be an action to ``take`` any items associated with the location (just take all of them, no menu needed!).
  - (4) Items are part of the description until they are taken from a ``Place``. See the ``getDescription`` method. It might be easier to create a new ``void printDescription()``
  
-### LockedExit / Requires Stuff: (=4..20 points; very similar to SecretExit)
+### LockedExit / Requires Stuff: (=12 points)
 What does this look like? Consider this example: [LockedExit.md](LockedExit.md)
- - (4 or 20) Implement a ``LockedExit`` that can only be chosen with the appropriate Key: hint: ``canOpen`` is nearly complete for you.
+ - (4) Implement a ``LockedExit`` class that extends ``Exit``.
+ - (4) ``LockedExit`` objects can only be chosen with the appropriate key (take a ``String required``) in the constructor.
+     ... hint: ``canOpen`` is nearly complete for you.
+ - (4) Add a ``LockedExit`` to your game. 
  
 ### Create a time system in your game. (=16)
  - (8) Create a class ``GameTime``, that has an ``int hour`` as state, ranging from 0 to 23 (inclusive). Implement ``int getHour()`` and ``void increaseHour()`` and print out the hour like a 12 or 24-hour watch. Do not change your ``hour`` field in your ***getter*** method.
